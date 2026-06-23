@@ -123,7 +123,7 @@ Dataset                                  N    Pulse   Sarvam   Δ Pulse-Sar
 - WER computed via `jiwer.process_words` after passing both refs and hyps through `normalize_indic()`:
   - nukta strip + chandrabindu→anusvara folding (via `indic-nlp-library`)
   - digit-run expansion to Indic words (via `indic-numtowords`)
-  - Latin↔Devanagari code-switch equivalence (476-entry curated dict in `codeswitch.json`)
+  - Latin↔Devanagari code-switch equivalence (bundled lookup map)
   - punctuation strip + multi-word phrase rules
 
 Same normalizer is used to score Sarvam's bundled hypotheses, so the comparison is apples-to-apples.
@@ -136,7 +136,7 @@ Same normalizer is used to score Sarvam's bundled hypotheses, so the comparison 
 |---|---|
 | `run_pulse_eval.py` | Main entrypoint — streams audio to Pulse, scores against refs |
 | `normalize.py` | `normalize_indic()` — shared text normalizer for Hindi/Indic WER |
-| `codeswitch.json` | Latin↔Devanagari equivalence dictionary (476 entries) |
+| `_dict_blob.py` | Compiled Latin↔Devanagari equivalence data (internal, loaded by `normalize.py`) |
 | `requirements.txt` | Python dependencies |
 
 ---
