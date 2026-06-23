@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.python-version
+
+# Pack output (generated)
+evals_acefone_test/
+evals_acefone_test.tar.gz
+pulse_hyps.jsonl
+pulse_summary.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+.DS_Store
