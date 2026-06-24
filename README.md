@@ -116,6 +116,24 @@ Dataset                                  N    Pulse   Sarvam   Δ Pulse-Sar
 
 ---
 
+## Optional — re-run Sarvam yourself
+
+The pack ships `sarvam_hyps.jsonl` for every dataset. If you want to regenerate them from scratch with your own Sarvam API key:
+
+```bash
+export SARVAM_API_KEY=sk_xxx
+
+python sarvam_transcribe.py \
+  --manifest  evals_test/categories/accent/manifest.jsonl \
+  --audio-root evals_test/categories/accent \
+  --output    evals_test/categories/accent/sarvam_hyps_local.jsonl \
+  --cache-dir .sarvam_cache/accent
+```
+
+Same protocol that produced the bundled hyps: `wss://api.sarvam.ai/speech-to-text/ws`, `saaras:v3`, `mode=codemix`, `language-code=hi-IN`, real-time pacing. Resumable — re-run to pick up where it stopped.
+
+---
+
 ## How it works
 
 - Streams 16 kHz mono PCM in 160 ms chunks to `wss://api.smallest.ai/waves/v1/pulse/get_text`
@@ -136,6 +154,7 @@ Same normalizer is used to score Sarvam's bundled hypotheses, so the comparison 
 | File | Purpose |
 |---|---|
 | `run_pulse_eval.py` | Main entrypoint — streams audio to Pulse, scores against refs |
+| `sarvam_transcribe.py` | Optional — regenerate `sarvam_hyps.jsonl` from your own Sarvam key |
 | `normalize.py` | `normalize_indic()` — shared text normalizer for Hindi/Indic WER |
 | `_dict_blob.py` | Compiled Latin↔Devanagari equivalence data (internal, loaded by `normalize.py`) |
 | `requirements.txt` | Python dependencies |
