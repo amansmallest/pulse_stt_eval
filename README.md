@@ -15,8 +15,9 @@ The data pack contains ~13k audios + reference transcripts + Sarvam hypotheses f
 
 ### Option A — via `gdown` (recommended for CLI)
 ```bash
-pip install gdown
-gdown --fuzzy "https://drive.google.com/file/d/1xJMOyHnM-e10Ck6o9AfKd07iXJnDNnoa/view?usp=sharing"
+pip install -U gdown          # 6.x+; URL parsing is automatic
+gdown "https://drive.google.com/file/d/1xJMOyHnM-e10Ck6o9AfKd07iXJnDNnoa/view?usp=sharing" \
+      -O evals_test.tar.gz
 ```
 
 ### Option B — browser
