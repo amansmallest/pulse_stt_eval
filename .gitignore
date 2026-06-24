@@ -7,8 +7,8 @@ venv/
 .python-version
 
 # Pack output (generated)
-evals_acefone_test/
-evals_acefone_test.tar.gz
+evals_test/
+evals_test.tar.gz
 pulse_hyps.jsonl
 pulse_summary.json
 

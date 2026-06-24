@@ -10,26 +10,26 @@ Evaluation script that runs **Smallest AI Pulse STT** (production streaming WebS
 
 The data pack contains ~13k audios + reference transcripts + Sarvam hypotheses for 22 datasets (15 robustness categories, 4 benchmarks, 3 Hinglish sets).
 
-**Direct link:** https://drive.google.com/file/d/1ubQ_BxD80oPd6IGZI5V7othkmRIAdcq8/view?usp=sharing
+**Direct link:** https://drive.google.com/file/d/1xJMOyHnM-e10Ck6o9AfKd07iXJnDNnoa/view?usp=sharing
 (6.3 GB tarball — extracts to ~6.7 GB)
 
 ### Option A — via `gdown` (recommended for CLI)
 ```bash
 pip install gdown
-gdown --fuzzy "https://drive.google.com/file/d/1ubQ_BxD80oPd6IGZI5V7othkmRIAdcq8/view?usp=sharing"
+gdown --fuzzy "https://drive.google.com/file/d/1xJMOyHnM-e10Ck6o9AfKd07iXJnDNnoa/view?usp=sharing"
 ```
 
 ### Option B — browser
-Click the link → "Download anyway" (Drive will warn it's too big to virus-scan, that's fine) → save as `evals_acefone_test.tar.gz`.
+Click the link → "Download anyway" (Drive will warn it's too big to virus-scan, that's fine) → save as `evals_test.tar.gz`.
 
 ### Extract
 ```bash
-tar xzf evals_acefone_test.tar.gz
+tar xzf evals_test.tar.gz
 ```
 
-You'll get an `evals_acefone_test/` directory with:
+You'll get an `evals_test/` directory with:
 ```
-evals_acefone_test/
+evals_test/
 ├── README.md
 ├── summary.json
 ├── categories/   (15 datasets, ~4.9k audios)
@@ -68,23 +68,23 @@ export PULSE_API_KEY=sk_xxx
 
 ### Full pack (all 22 datasets, ~13k audios)
 ```bash
-python run_pulse_eval.py --pack-dir ./evals_acefone_test
+python run_pulse_eval.py --pack-dir ./evals_test
 ```
 
 Takes ~90 minutes at default concurrency (8 parallel WebSocket sessions). Increase `--concurrency 16` if your network can handle it.
 
 ### Quick sanity check (one dataset)
 ```bash
-python run_pulse_eval.py --pack-dir ./evals_acefone_test --only categories/repetition
+python run_pulse_eval.py --pack-dir ./evals_test --only categories/repetition
 ```
 
 ### Other useful flags
 ```bash
 # Only re-score (skip transcription, use existing pulse_hyps.jsonl)
-python run_pulse_eval.py --pack-dir ./evals_acefone_test --skip-transcribe
+python run_pulse_eval.py --pack-dir ./evals_test --skip-transcribe
 
 # Use a different language code
-python run_pulse_eval.py --pack-dir ./evals_acefone_test --language en
+python run_pulse_eval.py --pack-dir ./evals_test --language en
 ```
 
 ---
@@ -93,7 +93,7 @@ python run_pulse_eval.py --pack-dir ./evals_acefone_test --language en
 
 For each dataset, the script writes a `pulse_hyps.jsonl` alongside the existing `our_hyps.jsonl` and `sarvam_hyps.jsonl`:
 ```
-evals_acefone_test/categories/accent/
+evals_test/categories/accent/
 ├── manifest.jsonl
 ├── our_hyps.jsonl         (precomputed Pulse hyps in the shipped pack)
 ├── sarvam_hyps.jsonl
@@ -111,7 +111,7 @@ Dataset                                  N    Pulse   Sarvam   Δ Pulse-Sar
   ...
 ```
 
-…and saves the full table to `evals_acefone_test/pulse_summary.json`.
+…and saves the full table to `evals_test/pulse_summary.json`.
 
 ---
 

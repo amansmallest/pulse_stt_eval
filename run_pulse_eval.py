@@ -1,4 +1,4 @@
-"""Run Pulse STT (Smallest AI) over every dataset in the evals_acefone_test pack.
+"""Run Pulse STT (Smallest AI) over every dataset in the evals_test pack.
 
 For each dataset under {pack-dir}/categories/, /benchmarks/, /hinglish/:
   - read manifest.jsonl
@@ -9,9 +9,9 @@ For each dataset under {pack-dir}/categories/, /benchmarks/, /hinglish/:
 
 Usage:
     export PULSE_API_KEY=sk_xxx
-    python run_pulse_eval.py --pack-dir ./evals_acefone_test
-    python run_pulse_eval.py --pack-dir ./evals_acefone_test --concurrency 8
-    python run_pulse_eval.py --pack-dir ./evals_acefone_test --only categories/accent
+    python run_pulse_eval.py --pack-dir ./evals_test
+    python run_pulse_eval.py --pack-dir ./evals_test --concurrency 8
+    python run_pulse_eval.py --pack-dir ./evals_test --only categories/accent
 
 Outputs:
     {dataset}/pulse_hyps.jsonl   — {audio_filepath, hypothesis} per line, line-aligned with manifest.jsonl
@@ -177,8 +177,8 @@ def compute_wer(dataset_dir: Path) -> dict:
 async def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                   formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--pack-dir", type=Path, default=Path("evals_acefone_test"),
-                    help="path to extracted evals_acefone_test/ folder")
+    ap.add_argument("--pack-dir", type=Path, default=Path("evals_test"),
+                    help="path to extracted evals_test/ folder")
     ap.add_argument("--api-key", default=os.environ.get("PULSE_API_KEY"),
                     help="Pulse STT API key (or set PULSE_API_KEY env var)")
     ap.add_argument("--language", default="hi", help="ASR language code")
